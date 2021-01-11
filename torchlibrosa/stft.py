@@ -410,9 +410,9 @@ class LogmelFilterBank:  # (nn.Module):
 
         self.melW = nn.Parameter(torch.Tensor(self.melW))
 
-        if freeze_parameters:
-            for param in self.parameters():
-                param.requires_grad = False
+        # if freeze_parameters:
+        #     for param in self.parameters():
+        #         param.requires_grad = False
 
     # def forward(self, input):
     def __call__(self, input):
