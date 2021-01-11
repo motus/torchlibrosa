@@ -354,7 +354,8 @@ class ISTFT(DFTBase):
         return y
         
 
-class Spectrogram(nn.Module):
+class Spectrogram:  # (nn.Module):
+
     def __init__(self, n_fft=2048, hop_length=None, win_length=None, 
         window='hann', center=True, pad_mode='reflect', power=2.0, 
         freeze_parameters=True):
@@ -369,7 +370,8 @@ class Spectrogram(nn.Module):
             win_length=win_length, window=window, center=center, 
             pad_mode=pad_mode, freeze_parameters=True)
 
-    def forward(self, input):
+    # def forward(self, input):
+    def __call__(self, input):
         """input: (batch_size, 1, time_steps, n_fft // 2 + 1)
         Returns:
           spectrogram: (batch_size, 1, time_steps, n_fft // 2 + 1)
@@ -388,7 +390,8 @@ class Spectrogram(nn.Module):
         return spectrogram
 
 
-class LogmelFilterBank(nn.Module):
+class LogmelFilterBank:  # (nn.Module):
+
     def __init__(self, sr=32000, n_fft=2048, n_mels=64, fmin=50, fmax=14000, is_log=True, 
         ref=1.0, amin=1e-10, top_db=80.0, freeze_parameters=True):
         """Calculate logmel spectrogram using pytorch. The mel filter bank is 
@@ -411,7 +414,8 @@ class LogmelFilterBank(nn.Module):
             for param in self.parameters():
                 param.requires_grad = False
 
-    def forward(self, input):
+    # def forward(self, input):
+    def __call__(self, input):
         """input: (batch_size, channels, time_steps)
         
         Output: (batch_size, time_steps, mel_bins)
